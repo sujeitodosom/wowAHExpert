@@ -5,6 +5,7 @@ define('HOME', dirname(__FILE__));
 
 require_once HOME . DS . 'utilities' . DS . 'meekrodb.2.3.class.php';
 require_once HOME . DS . 'utilities' . DS . 'toolbox.class.php';
+require_once HOME . DS . 'models'    . DS . 'infolinksmodel.php'; // This is temporary
 
 Toolbox::setDBMultiEnvironment();
 
@@ -37,7 +38,7 @@ while(!file_exists("auctions.json")){
 }
 
 //==================================================================//
-
+/*
 if (file_exists("auctions.json")){
     
     //Clean UP the database before update.
@@ -121,20 +122,18 @@ if (file_exists("auctions.json")){
 } else {
     echo "Desculpe, Garrosh deve ter feito algo pois o arquivo JSON não pode ser obtido... malditos Orcs!";
 }
+*/
+//=======================This is temporary==========================//
 
-//==================================================================//
+$myLink = new InfoLinks;
 
-DB::insert(
-        'infolinks', array( 
-                    'fetch_date' => $now,
-                    'url' => $json_url,
-                    'last_modified' => $lastModified
-            )
-        );
+$myLink->set_fetch_date($now);
+$myLink->set_last_modified($lastModified);
+$myLink->set_url($json_url);
 
-//Delete rows on infolinks older than 30 days
-//Verificar a disponibilidade de guardar pelos menos 30 dias de dados no server.
-DB::delete("infolinks","fetch_date < DATE_SUB(NOW(), INTERVAL 30 DAY)");
+$myLink->_setDB(new MeekroDB());
+
+$myLink->insert();
 
 //==================================================================//
 

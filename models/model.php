@@ -1,8 +1,7 @@
 <?php
 
-require_once HOME . DS . 'utilities' . DS . 'meekrodb.2.3.class.php';
-
 class Model{
+    protected $_db;
     protected $_sql;
     
     public function __construct() {
@@ -12,24 +11,20 @@ class Model{
         $this->_sql = $sql;
     }
     
-    public function getAll($data = null){
-        if(!$this->_sql){
-            throw new Exception('No SQL query.');
-        }
-        
-        $sth = DB::query($this->_sql);
-        
-        return $sth;
+    public function _setDB($db){
+        $this->_db = $db;
     }
-    
-    public function getRow($data = null){
-        if(!$this->_sql){
-            throw new Exception('No SQL query.');
+
+    public function query(){
+        if($this->_db){
+            if($this->_sql){
+                $this->_db->query($this->_sql);
+            } else {
+                throw new Exception('No SQL query.');
+            }
+        } else {
+            throw new Exception('You need to set a database for this object.');
         }
-        
-        $sth = DB::query($this->_sql);
-        
-        return $sth;
     }
 
 }
