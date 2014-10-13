@@ -19,10 +19,10 @@
 
 class DB {
   // initial connection
-  public static $dbName = 'auctionhouse';
-  public static $user = 'root';
+  public static $dbName = '';
+  public static $user = '';
   public static $password = '';
-  public static $host = 'localhost';
+  public static $host = '';
   public static $port = 3306;
   public static $encoding = 'utf8';
   

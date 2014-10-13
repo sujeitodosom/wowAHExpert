@@ -6,6 +6,8 @@ define('HOME', dirname(__FILE__));
 require_once HOME . DS . 'utilities' . DS . 'meekrodb.2.3.class.php';
 require_once HOME . DS . 'utilities' . DS . 'toolbox.class.php';
 
+Toolbox::setDBMultiEnvironment();
+
 //URL to JSON file containing the URL we will use to gather info regarding AH.
 $url = 'http://us.battle.net/api/wow/auction/data/gallywix';
 

@@ -57,7 +57,59 @@ class Toolbox {
         );
 
         return $values;
-    }	
+    }
+    
+    public static function setDBMultiEnvironment ()
+    {
+      $hostname = exec('hostname');
+            
+      switch($hostname){
+        
+          //Production Environment
+          case "lemans.websitewelcome.com" :   
+             //echo "Ambiente de testes de Produção"; 
+             DB::$user = 'td1_ah';
+             DB::$password = '17c67df';
+             DB::$dbName = 'td1_auctionhouse';
+             DB::$host = 'localhost';
+             DB::$port = '3306';
+             DB::$encoding = 'utf8';
+             break;  
+          //Leo's Sandbox Environment
+          case "MacBook-Pro-de-Leonardo.local" :    
+             //echo "Ambiente de testes do Leo"; 
+             DB::$user = 'root';
+             DB::$password = 'root';
+             DB::$dbName = 'auctionhouse';
+             DB::$host = 'localhost';
+             DB::$port = '8889';
+             DB::$encoding = 'utf8';
+             break;
+           //Ligio's Sandbox Environment
+           case "sujeitodosom-NB" : 
+             //echo "Ambiente de testes do Ligio";   
+             DB::$user = 'root';
+             DB::$password = '';
+             DB::$dbName = 'auctionhouse';
+             DB::$host = 'localhost';
+             DB::$port = '3306';
+             DB::$encoding = 'utf8';             
+             break;
+          //In case no environment could be identified!
+           default : 
+             //echo "Nenhum ambiente de testes";   
+             DB::$user = 'root';
+             DB::$password = '';
+             DB::$dbName = '';
+             DB::$host = 'localhost';
+             DB::$port = '3306';
+             DB::$encoding = 'latin1';              
+      }  
+        
+        
+        
+    }        
+    
 
 }
 /*
