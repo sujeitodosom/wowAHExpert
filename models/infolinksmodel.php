@@ -28,8 +28,6 @@ class InfoLinks extends Model{
     public function set_last_modified($_last_modified) {
         $this->_last_modified = $_last_modified;
     }
-
-
 }
 
 ?>

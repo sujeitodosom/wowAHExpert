@@ -1,11 +1,11 @@
 <?php
 
+require_once HOME . DS . 'utilities' . DS . 'meekrodb.2.3.class.php';
+
 class Model{
-    protected $_db;
     protected $_sql;
     
     public function __construct() {
-        $this->_db = DB::init();
     }
     
     public function _setSql($sql){
@@ -17,9 +17,9 @@ class Model{
             throw new Exception('No SQL query.');
         }
         
-        $sth = $this->_db->prepare($this->_sql);
-        $sth->execute($data);
-        return $sth->fetchAll();
+        $sth = DB::query($this->_sql);
+        
+        return $sth;
     }
     
     public function getRow($data = null){
@@ -27,9 +27,9 @@ class Model{
             throw new Exception('No SQL query.');
         }
         
-        $sth = $this->_db->prepare($this->_sql);
-        $sth->execute($data);
-        return $sth->fetch();
+        $sth = DB::query($this->_sql);
+        
+        return $sth;
     }
 
 }
