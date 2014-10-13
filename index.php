@@ -131,6 +131,7 @@ DB::insert(
         );
 
 //Delete rows on infolinks older than 30 days
+//Verificar a disponibilidade de guardar pelos menos 30 dias de dados no server.
 DB::delete("infolinks","fetch_date < DATE_SUB(NOW(), INTERVAL 30 DAY)");
 
 //==================================================================//
