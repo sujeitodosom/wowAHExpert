@@ -3,38 +3,17 @@
 class Toolbox {
     
     public static function readItem ( $item_code ){
-            $url = "http://eu.battle.net/api/wow/item/$item_code?locale=pt_PT";
+        
+        $url = "http://eu.battle.net/api/wow/item/$item_code?locale=pt_PT";
+
         return json_decode(file_get_contents($url), true);	
     }
+    
+    public static function getCurrentDate(){
+        
+        $current_DateTime = new DateTime();
 
-    public static function downloadFile ($url, $path){
-
-     $ret = 0;	
-     $newfname = $path;
-     $file = fopen ($url, "rb");
-     if ($file) {
-       $newf = fopen ($newfname, "wb");
-
-       if ($newf)
-       while(!feof($file)) {
-         fwrite($newf, fread($file, 1024 * 8 ), 1024 * 8 );
-       }
-     }
-
-     if ($file) {
-           $ret = 1;
-       fclose($file);
-     }
-     else $ret = 0;
-
-     if ($newf) {
-           $ret = 1;
-       fclose($newf);
-     }
-     else $ret = 0;
-
-     return $ret;
-
+        return date('Y-m-d H:i:s',$current_DateTime->getTimeStamp());
     }
 
     public static function translateAmount($value){

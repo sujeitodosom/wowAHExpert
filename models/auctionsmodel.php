@@ -12,7 +12,6 @@ class AuctionsModel extends Model{
     private $_buyout;
     private $_quantity;
     private $_timeLeft;
-    private $_rand;
     private $_seed;
     private $_petSpeciesId;
     private $_petBreedId;
@@ -20,142 +19,42 @@ class AuctionsModel extends Model{
     private $_petQualityId;
     private $_rand;
     
-    public function get_insert_date() {
-        return $this->_insert_date;
-    }
 
-    public function set_insert_date($_insert_date) {
-        $this->_insert_date = $_insert_date;
+    public function set_data($auction){
+        $this->_insert_date = $auction->insert_date;
+        $this->_lastModified = $auction->lastModified;
+        $this->_faction = $auction->faction;
+        $this->_auc = $auction->auc;
+        $this->_item = $auction->item;
+        $this->_owner = $auction->owner;
+        $this->_ownerRealm = $auction->ownerRealm;
+        $this->_bid = $auction->bid;
+        $this->_buyout = $auction->buyout;
+        $this->_quantity = $auction->quantity;
+        $this->_timeLeft = $auction->timeLeft;
+        $this->_seed = $auction->seed;
+        $this->_petSpeciesId = $auction->petSpeciesId;
+        $this->_petBreedId = $auction->petBreedId;
+        $this->_petLevel = $auction->petLevel;
+        $this->_petQualityId = $auction->petQualityId;
+        $this->_rand = $auction->rand;
     }
-
-    public function get_lastModified() {
-        return $this->_lastModified;
+    
+    public function insert(){
+        $this->_setSql("INSERT INTO auctions (
+                            insert_date, lastModified, faction, auc, item, owner,
+                            ownerRealm, bid, buyout, quantity, timeLeft, seed, petSpeciesId, 
+                            petBreedId, petLevel, petQualityId, rand
+                        ) VALUES (
+                            '$this->_insert_date', '$this->_lastModified', '$this->_faction', 
+                            '$this->_auc', '$this->_item', '$this->_owner', '$this->_ownerRealm', 
+                            '$this->_bid', '$this->_buyout', '$this->_quantity', '$this->_timeLeft', 
+                            '$this->_seed', '$this->_petSpeciesId', '$this->_petBreedId', '$this->_petLevel', 
+                            '$this->_petQualityId', '$this->_rand')");
+        
+        $this->query();
     }
-
-    public function set_lastModified($_lastModified) {
-        $this->_lastModified = $_lastModified;
-    }
-
-    public function get_faction() {
-        return $this->_faction;
-    }
-
-    public function set_faction($_faction) {
-        $this->_faction = $_faction;
-    }
-
-    public function get_auc() {
-        return $this->_auc;
-    }
-
-    public function set_auc($_auc) {
-        $this->_auc = $_auc;
-    }
-
-    public function get_item() {
-        return $this->_item;
-    }
-
-    public function set_item($_item) {
-        $this->_item = $_item;
-    }
-
-    public function get_owner() {
-        return $this->_owner;
-    }
-
-    public function set_owner($_owner) {
-        $this->_owner = $_owner;
-    }
-
-    public function get_ownerRealm() {
-        return $this->_ownerRealm;
-    }
-
-    public function set_ownerRealm($_ownerRealm) {
-        $this->_ownerRealm = $_ownerRealm;
-    }
-
-    public function get_bid() {
-        return $this->_bid;
-    }
-
-    public function set_bid($_bid) {
-        $this->_bid = $_bid;
-    }
-
-    public function get_buyout() {
-        return $this->_buyout;
-    }
-
-    public function set_buyout($_buyout) {
-        $this->_buyout = $_buyout;
-    }
-
-    public function get_quantity() {
-        return $this->_quantity;
-    }
-
-    public function set_quantity($_quantity) {
-        $this->_quantity = $_quantity;
-    }
-
-    public function get_timeLeft() {
-        return $this->_timeLeft;
-    }
-
-    public function set_timeLeft($_timeLeft) {
-        $this->_timeLeft = $_timeLeft;
-    }
-
-    public function get_rand() {
-        return $this->_rand;
-    }
-
-    public function set_rand($_rand) {
-        $this->_rand = $_rand;
-    }
-
-    public function get_seed() {
-        return $this->_seed;
-    }
-
-    public function set_seed($_seed) {
-        $this->_seed = $_seed;
-    }
-
-    public function get_petSpeciesId() {
-        return $this->_petSpeciesId;
-    }
-
-    public function set_petSpeciesId($_petSpeciesId) {
-        $this->_petSpeciesId = $_petSpeciesId;
-    }
-
-    public function get_petBreedId() {
-        return $this->_petBreedId;
-    }
-
-    public function set_petBreedId($_petBreedId) {
-        $this->_petBreedId = $_petBreedId;
-    }
-
-    public function get_petLevel() {
-        return $this->_petLevel;
-    }
-
-    public function set_petLevel($_petLevel) {
-        $this->_petLevel = $_petLevel;
-    }
-
-    public function get_petQualityId() {
-        return $this->_petQualityId;
-    }
-
-    public function set_petQualityId($_petQualityId) {
-        $this->_petQualityId = $_petQualityId;
-    }
-
+    
 }
 
 ?>

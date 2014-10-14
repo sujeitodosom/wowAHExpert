@@ -5,22 +5,14 @@ define('HOME', dirname(__FILE__));
 
 require_once HOME . DS . 'utilities' . DS . 'meekrodb.2.3.class.php';
 require_once HOME . DS . 'utilities' . DS . 'toolbox.class.php';
+require_once HOME . DS . 'utilities' . DS . 'blizz.class.php'; // This is temporary
 require_once HOME . DS . 'models'    . DS . 'infolinksmodel.php'; // This is temporary
 
 Toolbox::setDBMultiEnvironment();
 
-//URL to JSON file containing the URL we will use to gather info regarding AH.
-$url = 'http://us.battle.net/api/wow/auction/data/gallywix';
-
-$json = json_decode(file_get_contents($url), true);
-$json_url = $json["files"][0]["url"];
-
-//Get current date time and format it.
-$current_DateTime = new DateTime();
-$now = date('Y-m-d H:i:s',$current_DateTime->getTimeStamp());
-
-$lastModified = date('Y-m-d H:i:s',($json["files"][0]["lastModified"]/1000));	
-
+$json = Blizz::get_ah_info("gallywix");
+$now = Toolbox::getCurrentDate();
+$lastModified = date('Y-m-d H:i:s',($json["files"][0]["lastModified"]/1000));
 
 //==================================================================//
 
@@ -29,7 +21,7 @@ if (file_exists("auctions.json")) unlink("auctions.json");
 $_c=0; $_lim=5;
 
 while(!file_exists("auctions.json")){
-    Toolbox::downloadFile($json_url,"auctions.json");
+    Toolbox::downloadFile($json["files"][0]["url"],"auctions.json");
    if (!file_exists("auctions.json")) ++$_c;
    if ($_c>=$_lim) { 
       break; 
@@ -126,13 +118,7 @@ if (file_exists("auctions.json")){
 //=======================This is temporary==========================//
 
 $myLink = new InfoLinks;
-
-$myLink->set_fetch_date($now);
-$myLink->set_last_modified($lastModified);
-$myLink->set_url($json_url);
-
-$myLink->_setDB(new MeekroDB());
-
+$myLink->set_data($now, $lastModified, $json["files"][0]["url"], new MeekroDB());
 $myLink->insert();
 
 //==================================================================//
