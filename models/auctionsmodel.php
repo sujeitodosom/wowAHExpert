@@ -1,5 +1,7 @@
 <?php
 
+//include 'model.php';
+
 class AuctionsModel extends Model{
     private $_insert_date;
     private $_lastModified;
@@ -53,6 +55,10 @@ class AuctionsModel extends Model{
                             '$this->_petQualityId', '$this->_rand')");
         
         $this->query();
+    }
+    
+    public static function clean_up(){
+        DB::delete('auctions','%d',1);
     }
     
 }

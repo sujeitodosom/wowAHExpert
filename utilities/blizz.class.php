@@ -3,6 +3,7 @@
 class Blizz {
     
     private static $_ah_url = "http://us.battle.net/api/wow/auction/data/";
+    private static $_character_url = "http://us.battle.net/api/wow/character/";
     
     private static function downloadFile ($url, $filename){
 
@@ -39,7 +40,16 @@ class Blizz {
     public static function get_ah_info($server = "gallywix"){
         return json_decode(file_get_contents($this->_ah_url .= $server), true);
     }
-    
+
+    public static function get_character_info($server, $char){
+        $url = "http://us.battle.net/api/wow/character/"; $url .= $server;
+        $url .=  '/'; $url .=  $char;
+        
+        var_dump($url);
+
+        return json_decode(file_get_contents($url), true);
+    }
+
     public static function get_auctions($json){
         if (file_exists("auctions.json")) unlink("auctions.json");
         

@@ -5,6 +5,7 @@ class Model{
     protected $_sql;
     
     public function __construct() {
+        $this->_db = new MeekroDB();
     }
     
     public function _setSql($sql){
@@ -15,16 +16,22 @@ class Model{
         $this->_db = $db;
     }
 
-    public function query(){
+    public function query($result = 1){
         if($this->_db){
             if($this->_sql){
-                $this->_db->query($this->_sql);
+                if($result == 1){
+                    $this->_db->query($this->_sql);
+                } else {
+                    $result = $this->_db->query($this->_sql);
+                }
             } else {
                 throw new Exception('No SQL query.');
             }
         } else {
             throw new Exception('You need to set a database for this object.');
         }
+        
+        return $result;
     }
 
 }
