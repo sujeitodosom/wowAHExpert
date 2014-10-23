@@ -9,7 +9,6 @@ Toolbox::setDBMultiEnvironment();
 
 require_once HOME . DS . 'utilities' . DS . 'bootstrap.php';
 
-
 function __autoload($class){
     if(file_exists(HOME . DS . 'utilities' . DS . strtolower($class) . '.php')){
         require_once HOME . DS . 'utilities' . DS . strtolower($class) . '.php';

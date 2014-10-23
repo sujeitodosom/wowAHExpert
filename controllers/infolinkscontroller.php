@@ -1,6 +1,6 @@
 <?php
 
-class InfoLinksController extends Controller{
+class InfolinksController extends Controller{
     
     public function __construct($model, $action) {
         parent::__construct($model, $action);

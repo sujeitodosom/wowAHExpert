@@ -1,11 +1,14 @@
-<IfModule mod_rewrite.c>
-    RewriteEngine on
-    RewriteRule    ^$    cv/    [L]
-    RewriteRule    (.*) cv/$1    [L]
- </IfModule>
-
 #OPTIONS
 Options All -Indexes
+Options +FollowSymLinks
+
+#REWRITE PARAMETERS
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?load=$1 [PT,L]
+</IfModule>
 
 #PROTECT .HTACCESS
 <Files .htaccess>

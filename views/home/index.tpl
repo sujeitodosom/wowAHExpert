@@ -4,8 +4,7 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>These are the infolinks gathered from the database.</h1>
-        <h3><?php var_dump($infolinks); ?></h3>
+        <h1><?php echo $greeting; ?></h1>
       </div>
 
     </div><!-- /.container -->

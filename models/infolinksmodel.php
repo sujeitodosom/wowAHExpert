@@ -1,6 +1,6 @@
 <?php
 
-class InfoLinksModel extends Model{
+class InfolinksModel extends Model{
     
     private $_fetch_date;
     private $_url;

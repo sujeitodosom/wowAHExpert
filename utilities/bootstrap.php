@@ -1,6 +1,6 @@
 <?php
 
-$controller = 'InfoLinks';
+$controller = 'Home';
 $action = 'index';
 $query = 1;
 
